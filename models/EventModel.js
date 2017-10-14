@@ -6,7 +6,7 @@ var config = require('../config/database');
 var elasticsearch = require('elasticsearch');
 //var EventModel=require('./EventModel');
 
-var esClient = new elasticsearch.Client({host: "https://01d0571e.ngrok.io"});
+var esClient = new elasticsearch.Client({host: "http://localhost:9200"});
 
 function eventObject(evtObj) {
 
@@ -97,7 +97,7 @@ function searchEngine(input,calback){
 				renderingEvents.push(evt)
 
 			})
-			calback(renderingEvents)
+			return calback(err,renderingEvents)
 		}
 
 

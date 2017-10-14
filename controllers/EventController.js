@@ -73,12 +73,12 @@ module.exports = {
         var input = req.body.loop;
 
         console.log(req.body)
-    Category.find({},function (err, Categories) {
-        if(err)
-            throw err;
-        else{
+
+
 
             Search(input,function (err, Event) {
+                console.log('im here')
+                console.log(Event)
                 if (err) {
                     return res.status(500).json({
                         message: 'Error when getting Event.',
@@ -89,12 +89,12 @@ module.exports = {
                     return json({'v':false,
                         'status':" 404 no event found"});
                 }
-                return res.render('events/list', {events: Event, categories: Categories});
+                return res.render('events/list', {events: Event});
 
-            });
+            }
 
-        }
-    });
+
+    );
     /* HACK: END*/
 
 },
