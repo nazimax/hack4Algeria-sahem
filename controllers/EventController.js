@@ -25,9 +25,12 @@ module.exports = {
     },
     listAllEvents: function (req, res){
         //TODO get all categories this function as callback
-        Category.find(function (err, Categories) {
-            /*err*/
-            EventModel.find(function(err, Events){
+        Category.find({},function (err, Categories) {
+            if(err)
+                throw err;
+            else{
+
+                EventModel.find(function(err, Events){
                 if (err) {
                     return res.status(500).json({
                         message: 'Error when getting Event.',
@@ -36,7 +39,10 @@ module.exports = {
                 }
 
                 return res.render('events/list', {events: Events, categories: Categories});
+
             });
+
+            }
         })
 
     },
@@ -148,7 +154,7 @@ module.exports = {
                     error: err
                 });
             }
-            return res.status(201).json(Event);
+            return res.render("events/detail")
         });
     },
 
