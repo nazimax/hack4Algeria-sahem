@@ -6,6 +6,8 @@ var EventController = require('../controllers/EventController.js');
  * GET
  */
 router.get('/', EventController.listAllEvents);
+router.post('/search', EventController.searchEngine);
+
 
 /**
   * Create event
@@ -26,7 +28,6 @@ router.post('/', EventController.create);
 /*POST
  *
  * */
-router.post('/', EventController.searchEngine);
 
 /*
  * PUT

@@ -65,7 +65,11 @@
                 </div>
                 
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><br><p><b>Publisher :</b><%=publisher %></p><p><b>Start Date : </b>b><%=s_date %></p><p><b>End Date :</b> <%=end_date %></p>
+                    <li class="list-group-item"><br>
+                        <p><b>Publisher :</b><%= publisher %></p>
+                        <p><b>Start Date : </b> <%= s_date %> </p>
+                        <p><b>End Date :</b> <%= end_date %> </p>
+
                  
                    
                     <table style="width:100%;" class="table table-bordered">
@@ -135,7 +139,28 @@
                                     </tbody>
                                 </table>
                               <center>
-                              <h4>Your Unique Link</h4>
+                                  Mokhtar Naz, [14.10.17 10:49]
+                                  $("#register").submit(function(){
+
+                                  $.ajax( {
+                                  url:'/login/register_me',
+                                  type:"POST",
+                                  data:{
+                                  "pseudo": $(this).find("input[name=pseudo]").val(),
+                                  "username": $(this).find("input[name=username]").val(),
+                                  "password": $(this).find("input[name=password]").val()
+                                  },
+
+                                  success: function(data) {
+                                  if (data.v == false)
+                                  alert(data.result.message)
+                                  else
+                                  window.location.href = data.result;
+                                  }
+                                  });
+
+                                  return false;
+                                  });        <h4>Your Unique Link</h4>
                               <div class="form-group">
 					    <input style="width:80%;" onClick="this.select();" type="email" class="form-control" id="exampleInputEmail1" value="http://example.com">
 					  </div>

@@ -70,13 +70,36 @@ module.exports = {
 /** get from searchEngine
  * */
     searchEngine: function (req, res) {
-        var input = req.body.query;
+        var input = req.body.loop;
 
         console.log(req.body)
+    Category.find({},function (err, Categories) {
+        if(err)
+            throw err;
+        else{
 
-    //Search(input)
+            Search(input,function (err, Event) {
+                if (err) {
+                    return res.status(500).json({
+                        message: 'Error when getting Event.',
+                        error: err
+                    });
+                }
+                if (!Event) {
+                    return json({'v':false,
+                        'status':" 404 no event found"});
+                }
+                return res.render('events/list', {events: Event, categories: Categories});
 
-    EventModel.findOne({_id: id}, function (err, Event) {
+            });
+
+        }
+    });
+    /* HACK: END*/
+
+},
+
+    /*EventModel.findOne({_id: id}, function (err, Event) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when getting Event.',
@@ -84,13 +107,14 @@ module.exports = {
                 });
             }
             if (!Event) {
-                return res.status(404).json({
-                    message: 'No such Event'
-                });
+                return json({'v':false,
+                'status':" 404 no event found"});
             }
-            return res.json(Event);
+
+            return json({"v":true,
+            data:Event});
         });
-    },
+    }*/
 
 
 

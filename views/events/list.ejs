@@ -65,9 +65,9 @@
 				<div class="col-lg-12">
                     <div class="maping">
                     <div class="search-bar">
-                        <form class="form-inline" role="form">
+                        <form class="form-inline" role="form" method="post" id="searching" action="/events/search">
 					  <div style="width:400px;" class="form-group">
-					    <input style="width:100%;" type="email" class="form-control" id="exampleInputEmail1" placeholder="enter something to search">
+					    <input name="loop" style="width:100%;" type="text" class="form-control" id="exampleInputEmail1" placeholder="enter something to search">
 					  </div>
 					  <button type="submit" class="btn btn-warning btn-lg">Let's see</button>
 					</form>
@@ -140,6 +140,36 @@
 
             </div>
           </div>
+
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js">
+
+
+        /*$("#searching").submit(function(){
+
+            $.ajax( {
+                url:'/events/searchAjax',
+                type:"POST",
+                data:{
+                    "loop": $(this).find("input[name=loop]").val()
+
+                },
+
+                success: function(response) {
+                    if (response.v == false)
+                        alert(response.result.message)
+                    else{}
+                       //TODO loop on response.data
+
+                }
+            });
+
+            return false;
+        });*/
+
+
+
+
+    </script>
       <script>
 
       var map = L.map('mapid').setView([51.505, -0.09], 13);
