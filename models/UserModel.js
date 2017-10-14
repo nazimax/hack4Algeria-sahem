@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 var EventModel=require('./EventModel')
+
 mongoose.connect('mongodb://localhost:27017/hackforalgeria');
 
 
@@ -50,6 +51,17 @@ UserSchema.statics.joinEvent=function (UserId,EventId,cal) {
     EventModel.findOne({_id:EventId},function (err,succ) {
       if(!err){
           succ.pendingParticipents.push(UserId)
+          UserModel.findOne({_id:UserId},function (err,user) {
+              if(user){
+                  user.reputation-=1;
+                  user.save(function (err,res) {
+                      if(res){
+                          console.log('reputation updated')
+                      }
+                  })
+              }
+          })
+
           succ.save(cal);
       }
     })

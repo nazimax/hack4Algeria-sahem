@@ -147,6 +147,8 @@ module.exports = {
         });
         Event.publisher = req.user;
 
+
+
         Event.save(function (err, Event) {
             if (err) {
                 return res.status(500).json({
