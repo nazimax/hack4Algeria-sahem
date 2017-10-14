@@ -1,5 +1,6 @@
 var Event = require('../models/EventModel.js');
 var EventModel=Event.EventModel
+var UserModel=require('../models/UserModel')
 var Search=Event.searchEngine;
 var Category = require('../models/categoryModel');
 /**
@@ -135,7 +136,8 @@ module.exports = {
     create: function (req, res) {
         console.log(req.body)
         var Event = new EventModel({
-          name : req.body.name,
+
+            name : req.body.name,
 			s_date : req.body.s_date,
 			end_date : req.body.end_date,
 			place_map : req.body.place_map,
@@ -146,6 +148,18 @@ module.exports = {
 			pendingParticipents : req.body.pendingParticipents
         });
         Event.publisher = req.user;
+        UserModel.findOne({_id:req.user},function (err,user) {
+            if(!err){
+                user.reputation+=3;
+                user.save(function (err,res) {
+                    if(res){
+                        console.log('reputation updated')
+                    }
+                })
+
+            }
+        })
+
 
 
 

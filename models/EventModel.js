@@ -23,7 +23,7 @@ function eventObject(evtObj) {
 
 }
 var EventSchema = new Schema({
-	'publisher':{type: Schema.Types.ObjectId},
+	'publisher':{type: Schema.Types.ObjectId,ref:'users'},
 	'name': {type:String,es_index:true},
 	'uid': {type: Number, default: Date.now(), unique:true},
 	's_date' :{type: String, default: "00/00/00"},
